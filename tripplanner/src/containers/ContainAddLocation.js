@@ -15,12 +15,12 @@ const ContainAddLocation = ({ dispatch }) => {
 					if (!name.value.trim()) {
 			        	return
 			        }
-			        dispatch(addLocationMap(name.value, latitude, longitude))
+			        dispatch(addLocationMap(name.value, parseFloat(latitude.value), parseFloat(longitude.value)))
 				}}
 			>
-				<input ref={node => (name = node)} />
-				<input ref={node => (latitude = node)} />
-				<input ref={node => (longitude  = node)} />
+				<input type="text" ref={node => (name = node)} />
+				<input type="number" step="any" ref={node => (latitude = node)} />
+				<input type="number" step="any" ref={node => (longitude = node)} />
 				<button type="submit">Add Location</button>
 			</form>
 		</div>

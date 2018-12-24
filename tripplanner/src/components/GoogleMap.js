@@ -36,14 +36,6 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 
 class GoogleMaps extends Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			latitude: 0,
-			longitude: 0,
-		};
-	}
-
 	render() {
   		return (
 			<div style={{ height: '500px', width: '500px' }}>
