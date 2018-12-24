@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { selectLocation } from '../actions'
 import GoogleMap from '../components/GoogleMap';
+import GoogleMap2 from '../components/GoogleMap2';
 
 const mapStateToProps = state => {
 	return {
@@ -8,17 +9,8 @@ const mapStateToProps = state => {
 	}
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		onSelectLocation: (latitude, longitude) => {
-			dispatch(selectLocation(latitude, longitude))
-		}
-	}
-}
-
 const ContainMap = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(GoogleMap);
+	mapStateToProps
+)(GoogleMap2);
 
 export default ContainMap;

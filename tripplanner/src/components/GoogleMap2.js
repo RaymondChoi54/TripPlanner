@@ -1,42 +1,65 @@
-import React from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import redDot from '../redDot.png';
+import React, { Component } from 'react';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline } from 'react-google-maps';
 import config from '../config'
 
-export class MapContainer extends React.Component {
+
+const MyMapComponent = withScriptjs(withGoogleMap((props) =>
+  	<GoogleMap
+    	defaultZoom={12.5}
+    	defaultCenter={{ lat: 40.74215837520133, lng: -73.98990542164569 }}
+  	>
+	  	<Polyline 
+			path={[   
+				{"lat": 40.7282208, "lng": -73.79488019999999},
+				{"lat": 40.6781877, "lng": -73.9442203}
+			]}
+			options={{ 
+				strokeColor: '#ff2527',
+				strokeOpacity: 0.75,
+				strokeWeight: 3,
+				icons: [{ 
+					icon: "hello",
+					offset: '0',
+					repeat: '10px'
+				}],
+			}}
+		/>
+		{console.log(props.locations)}
+		{props.locations.map((location, index) => (
+	      	<Marker
+	      		key={index}
+	        	position={{lat:location.latitude, lng:location.longitude}}
+	    	/>
+	    ))}
+	</GoogleMap>
+))
+
+
+class GoogleMaps extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			latitude: 0,
+			longitude: 0,
+		};
 	}
 
-	onMapClicked(mapProps, map, clickEvent) {
-		console.log(mapProps)
-		console.log(map)
-		console.log(clickEvent)
-		console.log(this.s)
+	render() {
+  		return (
+			<div style={{ height: '500px', width: '500px' }}>
+				<MyMapComponent
+					isMarkerShown
+					googleMapURL={"https://maps.googleapis.com/maps/api/js?key=" + config.key + "&v=3.exp&libraries=geometry,drawing,places"}
+					loadingElement={<div style={{ height: '100%' }} />}
+					containerElement={<div style={{ height: '100%' }} />}
+					mapElement={<div style={{ height: '100%' }} />}
+					locations={this.props.state.locations}
+				/>
+			</div>
+		)
 	}
-
-  	render() {
-    	return (
-      		<Map 
-      			google={this.props.google} 
-      			zoom={12.5}
-      			initialCenter={{
-		        	lat: 40.74215837520133,
-		        	lng: -73.98990542164569
-		        }}
-		        style={{ height: '500px', width: '500px' }}
-		        onClick={this.onMapClicked}
-      		>
- 
-        		<Marker onClick={(e) => this.onMarkerClick(e)} name={'Current location'} />
- 
-      		</Map>
-    	);
-  	}
 }
- 
-export default GoogleApiWrapper({
-	apiKey: (config.key)
-})(MapContainer)
+
+
+export default GoogleMaps;

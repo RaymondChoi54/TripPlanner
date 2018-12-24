@@ -4,8 +4,6 @@ import redDot from '../redDot.png';
 import blueDot from '../blueDot.png';
 import config from '../config'
 
-import { connect } from 'react-redux';
-
 const defaultProps = {
     center: {
     	lat: 40.74215837520133,
@@ -16,56 +14,6 @@ const defaultProps = {
 
 const Pointer = ({ text }) => <img src={blueDot} alt={text} width="18" height="18" />;
 const AnyReactComponent = ({ text }) => <img src={redDot} alt={text} width="18" height="18" />;
-
-// const GoogleMap = ({ state, onSelectLocation }) => {
-
-//   	if(state.selection) {
-//   		return (
-// 			<div style={{ height: '500px', width: '500px' }}>
-// 				<GoogleMapReact
-// 					bootstrapURLKeys={{ key: config.key}}
-// 					defaultCenter={defaultProps.center}
-// 					defaultZoom={defaultProps.zoom}
-// 					onClick={location => onSelectLocation(location.lat, location.lng)}
-// 				>
-// 	          		<AnyReactComponent
-// 	          			lat={state.latitude}
-// 	          			lng={state.longitude}
-// 	          			text="sfdgsdfg"
-// 	          		/>
-// 		          	{state.locations.map((location, index) => (
-// 		          		<AnyReactComponent
-// 		          			key={index}
-// 		          			lat={location.latitude}
-// 		          			lng={location.longitude}
-// 		          			text={location.name}
-// 		          		/>
-// 		          	))}
-// 				</GoogleMapReact>
-// 			</div>
-// 		)
-//   	} else {
-// 		return (
-// 			<div style={{ height: '500px', width: '500px' }}>
-// 				<GoogleMapReact
-// 					bootstrapURLKeys={{ key: config.key}}
-// 					defaultCenter={defaultProps.center}
-// 					defaultZoom={defaultProps.zoom}
-// 					onClick={location => onSelectLocation(location.lat, location.lng)}
-// 				>
-// 		          	{state.locations.map((location, index) => (
-// 		          		<AnyReactComponent
-// 		          			key={index}
-// 		          			lat={location.latitude}
-// 		          			lng={location.longitude}
-// 		          			text={location.name}
-// 		          		/>
-// 		          	))}
-// 				</GoogleMapReact>
-// 			</div>
-// 		)
-// 	}
-// }
 
 class GoogleMap extends Component {
 
