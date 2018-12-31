@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withGoogleMap, GoogleMap, Marker, Polyline } from 'react-google-maps';
+import { withGoogleMap, GoogleMap, Marker, Polyline, DirectionsRenderer } from 'react-google-maps';
 
 const MyMapComponent = withGoogleMap(props =>
   	<GoogleMap
@@ -26,6 +26,7 @@ const MyMapComponent = withGoogleMap(props =>
 	        	position={{lat:location.latitude, lng:location.longitude}}
 	    	/>
 	    ))}
+	    <DirectionsRenderer directions={props.directions} />
 	</GoogleMap>
 )
 
@@ -38,23 +39,63 @@ class GoogleMaps extends Component {
 			path: [   
 				{"lat": 40.7282208, "lng": -73.79488019999999},
 				{"lat": 40.6781877, "lng": -73.9442203}
-			]
+			],
+			directions: null
 		};
 	}
 
+	componentDidMount() {
+		const google = window.google;
+		var directionsService = new google.maps.DirectionsService();
+		var directionsDisplay = new google.maps.DirectionsRenderer();
+
+		directionsService.route({
+		    origin: new google.maps.LatLng(40.7282208, -73.79488019999999),
+		    destination: new google.maps.LatLng(40.6781877, -73.9442203),
+		    travelMode: google.maps.TravelMode.DRIVING,
+		}, (response, status) => {
+			console.log(status)
+			console.log(response)
+	    	if(status === 'OK') {
+		    	directionsDisplay.setDirections(response);
+		    	this.setState({
+		    		directions: response
+		    	});
+		    }
+		});
+	}
+
 	render() {
-  		return (
-			<div style={{ height: '500px', width: '500px' }}>
-				<MyMapComponent
-					isMarkerShown
-					loadingElement={<div style={{ height: '100%' }} />}
-					containerElement={<div style={{ height: '100%' }} />}
-					mapElement={<div style={{ height: '100%' }} />}
-					locations={this.props.state.locations}
-					path={this.state.path}
-				/>
-			</div>
-		)
+		if(this.state.directions) {
+			return (
+				<div style={{ height: '500px', width: '500px' }}>
+					<MyMapComponent
+						isMarkerShown
+						loadingElement={<div style={{ height: '100%' }} />}
+						containerElement={<div style={{ height: '100%' }} />}
+						mapElement={<div style={{ height: '100%' }} />}
+						locations={this.props.state.locations}
+						path={this.state.path}
+						directions={this.state.directions}
+					/>
+				</div>
+			)
+
+		} else {
+			return (
+				<div style={{ height: '500px', width: '500px' }}>
+					<MyMapComponent
+						isMarkerShown
+						loadingElement={<div style={{ height: '100%' }} />}
+						containerElement={<div style={{ height: '100%' }} />}
+						mapElement={<div style={{ height: '100%' }} />}
+						locations={this.props.state.locations}
+						path={this.state.path}
+					/>
+				</div>
+			)
+
+		}
 	}
 }
 

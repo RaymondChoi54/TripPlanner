@@ -5,8 +5,8 @@ const locations = (state={locations: []}, action) => {
 				locations: [...state.locations, {
 					id: action.id,
 					name: action.name,
-					longitude: action.longitude,
 					latitude: action.latitude,
+					longitude: action.longitude,
 				}]
 			};
 		case 'DELETE_LOCATION':
