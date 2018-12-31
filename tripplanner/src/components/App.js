@@ -2,11 +2,11 @@ import React from 'react';
 import ContainAddLocation from '../containers/ContainAddLocation';
 import ContainLocationList from '../containers/ContainLocationList';
 import ContainMap from '../containers/ContainMap';
-import AutoComplete from '../components/AutoComplete';
+import ContainAutoComplete from '../containers/ContainAutoComplete';
 
 const App = () => (
 	<div>
-		<AutoComplete/>
+		<ContainAutoComplete/>
 		<ContainAddLocation/>
 		<ContainLocationList/>
 		<ContainMap/>

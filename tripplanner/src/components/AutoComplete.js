@@ -8,54 +8,36 @@ class AutoComplete extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			city: '',
-			query: ''
-		};
-		//this.handleScriptLoad = this.handleScriptLoad.bind(this);
     	this.handlePlaceSelect = this.handlePlaceSelect.bind(this);
 	}
 
-	componentDidMount() { 
-		// Declare Options For Autocomplete 
-		var options = { types: ['(cities)'] }; 
-
-		// Initialize Google Autocomplete 
-		/*global google*/
-		this.autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), options); 
-		// Fire Event when a suggested name is selected
+	componentDidMount() {
+		const google = window.google;
+		this.autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
 		this.autocomplete.addListener('place_changed', this.handlePlaceSelect); 
 	}
 
 	handlePlaceSelect() {
+		var addressObject = this.autocomplete.getPlace();
+		var address = addressObject.address_components;
 
-		// Extract City From Address Object
-		let addressObject = this.autocomplete.getPlace();
-		let address = addressObject.address_components;
-
-		// Check if address is valid
 		if(address) {
-			// Set State
-			this.setState({
-				city: address[0].long_name,
-				query: addressObject.formatted_address,
-			});
+			var location = this.autocomplete.getPlace().geometry.location;
+			this.props.onSubmit(addressObject.name, location.lat(), location.lng());
 		}
 	}
 
 	render() {
   		return (
-  			<MuiThemeProvider muiTheme={getMuiTheme()}>
-  			<div>    
-	  			<SearchBar id="autocomplete" placeholder="" hintText="Search City" value={this.state.query} 
+  			<MuiThemeProvider muiTheme={getMuiTheme()}>   
+	  			<SearchBar id="autocomplete" placeholder="" hintText="Search Location"
 	  				onChange={() => console.log()} 
-	  				onRequestSearch={() => console.log()}
+	  				onRequestSearch={() => console.log("seach")}
 		          	style={{
 		            	margin: '0 auto',
 		            	maxWidth: 800,
 		        	}}
 	        	/>
-  			</div>
   			</MuiThemeProvider>
 		)
 	}
