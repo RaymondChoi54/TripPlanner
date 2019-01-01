@@ -14,7 +14,7 @@ class AutoComplete extends Component {
 	componentDidMount() {
 		const google = window.google;
 		this.autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
-		this.autocomplete.addListener('place_changed', this.handlePlaceSelect); 
+		this.autocomplete.addListener('place_changed', this.handlePlaceSelect);
 	}
 
 	handlePlaceSelect() {
@@ -23,7 +23,8 @@ class AutoComplete extends Component {
 
 		if(address) {
 			var location = this.autocomplete.getPlace().geometry.location;
-			this.props.onSubmit(addressObject.name, location.lat(), location.lng());
+			this.props.addLocationMap(addressObject.name, location.lat(), location.lng());
+			this.props.updatePath(this.props.state.locations);
 		}
 	}
 
