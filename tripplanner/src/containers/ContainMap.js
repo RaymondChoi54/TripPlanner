@@ -1,18 +1,18 @@
 import { connect } from 'react-redux';
 import GoogleMap from '../components/GoogleMap';
-import { deleteLocation } from '../actions';
+import { fetchPath } from '../actions';
 
 const mapStateToProps = state => {
 	return {
 		state: state.locations,
-		path: state.path.path
+		path: state.path
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onLocationDelete: id => {
-			dispatch(deleteLocation(id))
+		fetchPath: locations => {
+			dispatch(fetchPath(locations))
 		}
 	}
 }

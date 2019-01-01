@@ -28,30 +28,34 @@ export const fetchPathFailure = error => ({
 
 export function fetchPath(locations) {
 	return function(dispatch) {
-		dispatch(fetchPathBegin());
+		if(locations.length < 2) {
+			dispatch(fetchPathFailure());
+		} else {
+			dispatch(fetchPathBegin());
 
-		const google = window.google;
-		var directionsService = new google.maps.DirectionsService();
+			const google = window.google;
+			var directionsService = new google.maps.DirectionsService();
 
-		var wayPoints = [];
-		for(var i = 1; i < locations.length - 1; i++) {
-			wayPoints.push({
-				location: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
-				stopover: true
-			})
+			var wayPoints = [];
+			for(var i = 1; i < locations.length - 1; i++) {
+				wayPoints.push({
+					location: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
+					stopover: true
+				})
+			}
+
+			directionsService.route({
+			    origin: new google.maps.LatLng(locations[0].latitude, locations[0].longitude),
+			    destination: new google.maps.LatLng(locations[locations.length - 1].latitude, locations[locations.length - 1].longitude),
+			    waypoints: wayPoints,
+			    travelMode: google.maps.TravelMode.DRIVING
+			}, (response, status) => { 
+		    	if(status === 'OK') {
+			    	dispatch(fetchPathSuccess(response));
+			    } else {
+			    	dispatch(fetchPathFailure());
+			    }
+			});
 		}
-
-		directionsService.route({
-		    origin: new google.maps.LatLng(locations[0].latitude, locations[0].longitude),
-		    destination: new google.maps.LatLng(locations[locations.length - 1].latitude, locations[locations.length - 1].longitude),
-		    waypoints: wayPoints,
-		    travelMode: google.maps.TravelMode.DRIVING
-		}, (response, status) => { 
-	    	if(status === 'OK') {
-		    	dispatch(fetchPathSuccess(response));
-		    } else {
-		    	dispatch(fetchPathFailure());
-		    }
-		});
 	}
 }

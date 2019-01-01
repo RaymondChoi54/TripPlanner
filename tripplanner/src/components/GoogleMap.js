@@ -17,11 +17,35 @@ const MyMapComponent = withGoogleMap(props =>
 	</GoogleMap>
 )
 
+const MyMapComponentNoD = withGoogleMap(props =>
+  	<GoogleMap
+    	defaultZoom={12.5}
+    	defaultCenter={{ lat: 40.74215837520133, lng: -73.98990542164569 }}
+  	>
+		{props.locations.map((location, index) => (
+	      	<Marker
+	      		key={index}
+	      		label={location.name}
+	        	position={{lat:location.latitude, lng:location.longitude}}
+	    	/>
+	    ))}
+	</GoogleMap>
+)
 
 class GoogleMaps extends Component {
+
+	componentWillMount() {
+		this.props.fetchPath(this.props.state.locations);
+	}
+
+	componentDidUpdate(prevProps) {
+	    if(this.props.state.locations.length !== prevProps.state.locations.length) {
+		   	this.props.fetchPath(this.props.state.locations);
+	    }
+	}
+
 	render() {
-		console.log(this.props.state.locations.length)
-		if(this.props.state.locations.length >= 2) {
+		if(this.props.path.path != null) {
 			return (
 				<div style={{ height: '500px', width: '500px' }}>
 					<MyMapComponent
@@ -30,14 +54,14 @@ class GoogleMaps extends Component {
 						containerElement={<div style={{ height: '100%' }} />}
 						mapElement={<div style={{ height: '100%' }} />}
 						locations={this.props.state.locations}
-						directions={this.props.path}
+						directions={this.props.path.path}
 					/>
 				</div>
 			)
 		} else {
 			return (
 				<div style={{ height: '500px', width: '500px' }}>
-					<MyMapComponent
+					<MyMapComponentNoD
 						isMarkerShown
 						loadingElement={<div style={{ height: '100%' }} />}
 						containerElement={<div style={{ height: '100%' }} />}
@@ -49,6 +73,5 @@ class GoogleMaps extends Component {
 		}
 	}
 }
-
 
 export default GoogleMaps;
