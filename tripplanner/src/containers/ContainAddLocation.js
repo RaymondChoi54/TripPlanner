@@ -12,7 +12,7 @@ const ContainAddLocation = ({ dispatch }) => {
 			<form
 				onSubmit={e => {
 					e.preventDefault()
-					if (!name.value.trim()) {
+					if(!name.value.trim()) {
 			        	return
 			        }
 			        dispatch(addLocationMap(name.value, parseFloat(latitude.value), parseFloat(longitude.value)))

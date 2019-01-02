@@ -1,3 +1,5 @@
+// Location
+
 let nextLocationId = 0;
 export const addLocationMap = (name, latitude, longitude) => ({
 	type: 'ADD_LOCATION_MAP',
@@ -11,6 +13,14 @@ export const deleteLocation = id => ({
 	type: 'DELETE_LOCATION',
 	id
 });
+
+export const editLocationTime = (id, minutes) => ({
+	type: 'EDIT_LOCATION_TIME',
+	id,
+	minutes
+});
+
+// Path
 
 export const fetchPathBegin = () => ({
 	type: 'FETCH_PATH_BEGIN'

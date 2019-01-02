@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { deleteLocation } from '../actions';
+import { deleteLocation, editLocationTime } from '../actions';
 import LocationList from '../components/LocationList'
 
 const mapStateToProps = state => {
@@ -12,6 +12,9 @@ const mapDispatchToProps = dispatch => {
 	return {
 		onLocationDelete: id => {
 			dispatch(deleteLocation(id))
+		},
+		editLocationTime: (id, minutes) => {
+			dispatch(editLocationTime(id, minutes))
 		}
 	}
 }

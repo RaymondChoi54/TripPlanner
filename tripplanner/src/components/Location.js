@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Location = ({ onClick, name, longitude, latitude }) => (
+const Location = ({ onClick, name, longitude, latitude, minutes }) => (
 	<li onClick={onClick}>
-		{name + " " + latitude + " " + longitude}
+		{name + " " + latitude + " " + longitude + " " + minutes}
 	</li>
 )
 
