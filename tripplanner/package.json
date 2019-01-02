@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "cross-fetch": "^3.0.0",
     "google-map-react": "^1.1.2",
     "google-maps-react": "^2.0.2",
     "googlemaps": "^1.12.0",

@@ -1,9 +1,16 @@
-// Location
+import fetch from 'cross-fetch'
 
-let nextLocationId = 0;
+/// Location ///
+
+// Start Date & Time
+export const editDateTime = (dateTime) => ({
+	type: 'EDIT_DATE_TIME',
+	dateTime
+});
+
+// Location Info
 export const addLocationMap = (name, latitude, longitude) => ({
 	type: 'ADD_LOCATION_MAP',
-	id: nextLocationId++,
 	name,
 	latitude,
 	longitude
@@ -20,7 +27,29 @@ export const editLocationTime = (id, minutes) => ({
 	minutes
 });
 
-// Path
+// Time Estimate Info
+
+export const fetchTimeSuccess = timeInfo => ({
+	type: 'FETCH_TIME_SUCCESS',
+	payload: timeInfo
+});
+
+export const fetchTimeFailure = error => ({
+	type: 'FETCH_TIME_FAILURE',
+	payload: error
+});
+
+export function fetchTimeEstimate(locations) {
+	return function(dispatch) {
+		if(locations.length < 2) {
+			return dispatch(fetchTimeFailure());
+		} else {
+			// return fetch
+		}
+	}
+}
+
+/// Path ///
 
 export const fetchPathBegin = () => ({
 	type: 'FETCH_PATH_BEGIN'
@@ -39,7 +68,7 @@ export const fetchPathFailure = error => ({
 export function fetchPath(locations) {
 	return function(dispatch) {
 		if(locations.length < 2) {
-			dispatch(fetchPathFailure());
+			return dispatch(fetchPathFailure());
 		} else {
 			dispatch(fetchPathBegin());
 
@@ -61,9 +90,9 @@ export function fetchPath(locations) {
 			    travelMode: google.maps.TravelMode.DRIVING
 			}, (response, status) => { 
 		    	if(status === 'OK') {
-			    	dispatch(fetchPathSuccess(response));
+			    	return dispatch(fetchPathSuccess(response));
 			    } else {
-			    	dispatch(fetchPathFailure());
+			    	return dispatch(fetchPathFailure());
 			    }
 			});
 		}

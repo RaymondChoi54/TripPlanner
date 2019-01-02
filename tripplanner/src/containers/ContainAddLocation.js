@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { addLocationMap } from '../actions'
+import { connect } from 'react-redux';
+import { addLocationMap } from '../actions';
 
 const ContainAddLocation = ({ dispatch }) => {
 	let name;
