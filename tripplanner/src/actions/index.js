@@ -44,7 +44,17 @@ export function fetchTimeEstimate(locations) {
 		if(locations.length < 2) {
 			return dispatch(fetchTimeFailure());
 		} else {
-			// return fetch
+			return fetch('http://localhost:5000/timeEstimate', {
+				method: 'post',
+				headers: { 'Content-Type':'application/json' },
+				body: JSON.stringify(locations)
+			})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data)
+				dispatch(fetchTimeSuccess(data))
+			})
+			.catch((err) => console.log("Error: " + err))
 		}
 	}
 }

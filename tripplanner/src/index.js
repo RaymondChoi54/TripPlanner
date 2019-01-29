@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import App from './components/App';
 
 import locationApp from './reducers';
-import { addLocationMap, editDateTime, editLocationTime } from './actions';
+import { addLocationMap, editDateTime, editLocationTime, fetchTimeEstimate } from './actions';
 
 const store = createStore(locationApp, applyMiddleware(thunk));
 
@@ -20,6 +20,9 @@ store.dispatch(editLocationTime(0, 20));
 store.dispatch(editLocationTime(1, 30));
 store.dispatch(editLocationTime(2, 45));
 store.dispatch(editLocationTime(3, 20));
+console.log(store.getState().locations)
+store.dispatch(fetchTimeEstimate(store.getState().locations))
+
 
 render(
 	<Provider store={store}>
