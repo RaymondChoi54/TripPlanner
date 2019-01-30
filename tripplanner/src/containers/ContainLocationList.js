@@ -4,7 +4,8 @@ import LocationList from '../components/LocationList'
 
 const mapStateToProps = state => {
 	return {
-		locations: state.locations.locations
+		locations: state.locations.locations,
+		timeInfo: state.locations.timeInfo
 	}
 }
 

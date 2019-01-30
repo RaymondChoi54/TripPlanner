@@ -52,7 +52,7 @@ export function fetchTimeEstimate(locations) {
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data)
-				dispatch(fetchTimeSuccess(data))
+				dispatch(fetchTimeSuccess(data.travelTime))
 			})
 			.catch((err) => console.log("Error: " + err))
 		}

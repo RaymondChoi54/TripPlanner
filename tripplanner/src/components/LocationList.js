@@ -1,14 +1,14 @@
 import React from 'react';
 import Location from '../components/Location';
 
-const LocationList = ({ locations, onLocationDelete, editLocationTime }) => {
+const LocationList = ({ locations, timeInfo, onLocationDelete, editLocationTime }) => {
 	let minutes = [];
 
 	return (
 		<ul>
 			{locations.map((location, index) => (
 				<div key={index}>
-					<Location {...location} />
+					<Location {...location} timeInfo={timeInfo} />
 					<button onClick={() => onLocationDelete(index)}>
 						{"Delete"}
 					</button>

@@ -41,7 +41,7 @@ app.post('/timeEstimate', function(req, res) {
 	.then(data => {
 		console.log(data);
 		return res.status(200).send({
-			travel: data
+			travelTime: data
 		});
 	}).catch(err => {
 		return res.sendStatus(400);
