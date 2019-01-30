@@ -35,12 +35,12 @@ const MyMapComponentNoD = withGoogleMap(props =>
 class GoogleMaps extends Component {
 
 	componentWillMount() {
-		this.props.fetchPath(this.props.state.locations);
+		this.props.fetchPath();
 	}
 
 	componentDidUpdate(prevProps) {
 	    if(this.props.state.locations.length !== prevProps.state.locations.length) {
-		   	this.props.fetchPath(this.props.state.locations);
+		   	this.props.fetchPath();
 	    }
 	}
 

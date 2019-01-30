@@ -75,8 +75,11 @@ export const fetchPathFailure = error => ({
 	payload: error
 });
 
-export function fetchPath(locations) {
-	return function(dispatch) {
+export function fetchPath() {
+	return function(dispatch, getState) {
+		console.log(getState())
+		var locations = getState().locations.locations;
+
 		if(locations.length < 2) {
 			return dispatch(fetchPathFailure());
 		} else {
