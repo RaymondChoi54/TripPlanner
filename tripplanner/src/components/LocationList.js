@@ -8,7 +8,7 @@ const LocationList = ({ locations, timeInfo, onLocationDelete, editLocationTime 
 		<ul>
 			{locations.map((location, index) => (
 				<div key={index}>
-					<Location {...location} timeInfo={timeInfo} />
+					<Location {...location} timeInfo={timeInfo} index={index}/>
 					<button onClick={() => onLocationDelete(index)}>
 						{"Delete"}
 					</button>

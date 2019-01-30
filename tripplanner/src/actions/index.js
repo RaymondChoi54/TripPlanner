@@ -39,8 +39,10 @@ export const fetchTimeFailure = error => ({
 	payload: error
 });
 
-export function fetchTimeEstimate(locations) {
-	return function(dispatch) {
+export function fetchTimeEstimate() {
+	return function(dispatch, getState) {
+		var locations = getState().locations;
+
 		if(locations.length < 2) {
 			return dispatch(fetchTimeFailure());
 		} else {

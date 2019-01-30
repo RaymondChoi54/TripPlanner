@@ -1,16 +1,20 @@
 import React from 'react';
 
-const Location = ({ onClick, name, longitude, latitude, minutes, timeInfo, start, end }) => {
-	if(timeInfo && start) {
+const Location = ({ onClick, name, longitude, latitude, minutes, timeInfo, start, end, index }) => {
+	if(timeInfo && index > 0) {
 		return (
 			<li onClick={onClick}>
-				{name + " " + latitude + " " + longitude + " " + minutes + " Depart at " + start + " to arrive at " + end}
+				{name}
+				<br/>
+				{"Staying for " + minutes + " min"}
+				<br/> 
+				{"Depart at " + new Date(start).toLocaleTimeString() + " to arrive at " + new Date(end).toLocaleTimeString()}
 			</li>
 		)
 	} else {
 		return (
 			<li onClick={onClick}>
-				{name + " " + latitude + " " + longitude + " " + minutes}
+				{name}
 			</li>
 		)
 	}
