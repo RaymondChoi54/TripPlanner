@@ -20,11 +20,7 @@ store.dispatch(editLocationTime(0, 20));
 store.dispatch(editLocationTime(1, 30));
 store.dispatch(editLocationTime(2, 45));
 store.dispatch(editLocationTime(3, 20));
-
 store.dispatch(fetchTimeEstimate(store.getState().locations))
-
-console.log(store.getState().locations)
-
 
 render(
 	<Provider store={store}>

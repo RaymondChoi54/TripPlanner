@@ -53,7 +53,6 @@ export function fetchTimeEstimate() {
 			})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data)
 				dispatch(fetchTimeSuccess(data.travelTime))
 			})
 			.catch((err) => console.log("Error: " + err))
@@ -79,7 +78,6 @@ export const fetchPathFailure = error => ({
 
 export function fetchPath() {
 	return function(dispatch, getState) {
-		console.log(getState())
 		var locations = getState().locations.locations;
 
 		if(locations.length < 2) {

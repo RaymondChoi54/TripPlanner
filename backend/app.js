@@ -14,7 +14,6 @@ app.use(require("body-parser").json());
 app.use(cors());
 
 app.post('/timeEstimate', function(req, res) {
-	console.log(req.body)
 	// Check if valid //
 
 	// Must have locations and data time
@@ -39,7 +38,6 @@ app.post('/timeEstimate', function(req, res) {
 
 	AllTravelInfo(req.body.locations, req.body.dateTime)
 	.then(data => {
-		console.log(data);
 		return res.status(200).send({
 			travelTime: data
 		});

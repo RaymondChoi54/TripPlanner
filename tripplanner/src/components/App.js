@@ -1,5 +1,4 @@
 import React from 'react';
-import ContainAddLocation from '../containers/ContainAddLocation';
 import ContainLocationList from '../containers/ContainLocationList';
 import ContainMap from '../containers/ContainMap';
 import ContainAutoComplete from '../containers/ContainAutoComplete';
@@ -11,7 +10,6 @@ const App = () => (
 		<ContainAutoComplete/>
 		<ContainUpdate/>
 		<ContainEditDateTime/>
-		<ContainAddLocation/>
 		<ContainLocationList/>
 		<ContainMap/>
 	</div>
