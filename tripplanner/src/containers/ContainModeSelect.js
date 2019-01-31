@@ -10,7 +10,6 @@ const ContainModeSelect = ({ dispatch }) => {
 			<form
 				onChange={e => {
 					e.preventDefault();
-					console.log(mode.value);
 					dispatch(selectMode(mode.value));
 				}}
 			>
