@@ -36,7 +36,7 @@ app.post('/timeEstimate', function(req, res) {
 
 	// Make requests for data //
 
-	AllTravelInfo(req.body.locations, req.body.dateTime)
+	AllTravelInfo(req.body.locations, req.body.dateTime, req.body.mode)
 	.then(data => {
 		return res.status(200).send({
 			travelTime: data
@@ -48,21 +48,22 @@ app.post('/timeEstimate', function(req, res) {
 
 });
 
-async function AllTravelInfo(locations, time) {
+async function AllTravelInfo(locations, time, mode) {
 	var res = [];
 	var currTime = time;
 
 	for(var i = 0; i < locations.length - 1; i++) {
-		var locationResult = await travelInfo(locations[i], locations[i + 1], currTime);
+		var locationResult = await travelInfo(locations[i], locations[i + 1], currTime, mode);
 		currTime = new Date(new Date(locationResult.end).getTime() + locations[i + 1].minutes * 60 * 1000);
 		res.push(locationResult)
 	}
 	return res;
 }
 
-function travelInfo(origin, destination, startTime) {
+function travelInfo(origin, destination, startTime, mode) {
 	return new Promise(function(resolve, reject) {
 		googleMapsClient.distanceMatrix({
+			mode: mode,
 		    origins: [{lat: origin.latitude, lng: origin.longitude }],
 		    destinations: [{lat: destination.latitude, lng: destination.longitude }]
 	  	}, function(err, response) {

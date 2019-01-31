@@ -2,6 +2,12 @@ import fetch from 'cross-fetch'
 
 /// Location ///
 
+// Mode
+export const selectMode = (mode) => ({
+	type: 'SELECT_MODE',
+	mode
+});
+
 // Start Date & Time
 export const editDateTime = (dateTime) => ({
 	type: 'EDIT_DATE_TIME',

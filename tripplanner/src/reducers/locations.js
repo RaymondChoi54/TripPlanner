@@ -1,5 +1,11 @@
-const locations = (state={locations: [], dateTime: null, timeInfo: false, selected: -1}, action) => {
+const locations = (state={locations: [], dateTime: null, timeInfo: false, selected: -1, mode: "driving"}, action) => {
 	switch(action.type) {
+		case 'SELECT_MODE':
+			return {
+				...state,
+				mode: action.mode
+			};
+
 		case 'ADD_LOCATION':
 			return {
 				...state,
