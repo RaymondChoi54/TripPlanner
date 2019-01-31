@@ -42,6 +42,7 @@ app.post('/timeEstimate', function(req, res) {
 			travelTime: data
 		});
 	}).catch(err => {
+		console.log("Error: Request for travel data failed");
 		return res.sendStatus(400);
 	});
 
