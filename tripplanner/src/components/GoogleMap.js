@@ -34,12 +34,25 @@ const MyMapComponentNoD = withGoogleMap(props =>
 
 class GoogleMaps extends Component {
 
+	pathNeedsChange(curr, prev) {
+		if(curr.locations.length !== prev.locations.length) {
+			return true;
+		}
+
+		for(var i = 0; i < curr.locations.length; i++) {
+			if(curr.locations[i].latitude !== prev.locations[i].latitude || curr.locations[i].latitude !== prev.locations[i].latitude) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	componentWillMount() {
 		this.props.fetchPath();
 	}
 
 	componentDidUpdate(prevProps) {
-	    if(this.props.state.locations.length !== prevProps.state.locations.length) {
+	    if(this.pathNeedsChange(this.props.state, prevProps.state)) {
 		   	this.props.fetchPath();
 	    }
 	}
