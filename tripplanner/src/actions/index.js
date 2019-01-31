@@ -16,6 +16,19 @@ export const addLocationMap = (name, latitude, longitude) => ({
 	longitude
 });
 
+export const selectLocation = (id) => ({
+	type: 'SELECT_LOCATION',
+	id
+})
+
+export const editLocation = (name, latitude, longitude, id) => ({
+	type: 'EDIT_LOCATION',
+	name,
+	latitude,
+	longitude,
+	id
+})
+
 export const deleteLocation = id => ({
 	type: 'DELETE_LOCATION',
 	id

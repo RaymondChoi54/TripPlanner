@@ -1,29 +1,14 @@
 import React from 'react';
 import Location from '../components/Location';
+import EditLocation from '../components/EditLocation';
 
-const LocationList = ({ locations, timeInfo, onLocationDelete, editLocationTime }) => {
-	let minutes = [];
-
+const LocationList = ({ locations, timeInfo, selected, onLocationDelete, editLocationTime, selectLocation }) => {
 	return (
 		<ul>
 			{locations.map((location, index) => (
 				<div key={index}>
-					<Location {...location} timeInfo={timeInfo} index={index}/>
-					<button onClick={() => onLocationDelete(index)}>
-						{"Delete"}
-					</button>
-					<form 
-						onSubmit={e => {
-							e.preventDefault()
-
-							if(!minutes[index].value) {
-				        		return
-				        	}
-				        	editLocationTime(index, parseInt(minutes[index].value))
-				        }}
-				    >
-						<input type="number" ref={node => (minutes[index] = node)} />
-					</form>
+					<Location {...location} timeInfo={timeInfo} index={index} onClick={() => {selectLocation(index)}}/>
+					<EditLocation selected={selected} index={index} onLocationDelete={onLocationDelete} editLocationTime={editLocationTime}/>
 				</div>
 			))}
 		</ul>

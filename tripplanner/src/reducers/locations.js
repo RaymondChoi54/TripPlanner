@@ -1,4 +1,4 @@
-const locations = (state={locations: [], dateTime: null, timeInfo: false}, action) => {
+const locations = (state={locations: [], dateTime: null, timeInfo: false, selected: -1}, action) => {
 	switch(action.type) {
 		case 'ADD_LOCATION_MAP':
 			return {
@@ -12,11 +12,31 @@ const locations = (state={locations: [], dateTime: null, timeInfo: false}, actio
 				timeInfo: false
 			};
 
+		case 'SELECT_LOCATION':
+			return {
+				...state,
+				selected: (state.selected === action.id) ? -1 : action.id
+			};
+
+		case 'EDIT_LOCATION':
+			return {
+				...state,
+				locations: state.locations.map((location, index) => (index === action.id) ? {
+					name: action.name,
+					latitude: action.latitude,
+					longitude: action.longitude,
+					minutes: location.minutes
+				} : location),
+				timeInfo: false,
+				selected: -1
+			};
+
 		case 'DELETE_LOCATION':
 			return {
 				...state,
 				locations: state.locations.filter((location, index) => (index !== action.id)),
-				timeInfo: false
+				timeInfo: false,
+				selected: -1
 			};
 
 		case 'EDIT_LOCATION_TIME':
