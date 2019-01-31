@@ -1,6 +1,6 @@
 const locations = (state={locations: [], dateTime: null, timeInfo: false, selected: -1}, action) => {
 	switch(action.type) {
-		case 'ADD_LOCATION_MAP':
+		case 'ADD_LOCATION':
 			return {
 				...state,
 				locations: [...state.locations, {

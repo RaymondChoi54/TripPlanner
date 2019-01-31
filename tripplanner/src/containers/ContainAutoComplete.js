@@ -1,6 +1,6 @@
 // import React from 'react';
 import { connect } from 'react-redux';
-import { addLocationMap } from '../actions';
+import { addEditLocation } from '../actions';
 import AutoComplete from '../components/AutoComplete';
 
 const mapStateToProps = state => {
@@ -11,8 +11,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addLocationMap: (name, lat, lng) => {
-			dispatch(addLocationMap(name, lat, lng))
+		addEditLocation: (name, lat, lng) => {
+			dispatch(addEditLocation(name, lat, lng))
 		}
 	}
 }

@@ -23,7 +23,7 @@ class AutoComplete extends Component {
 
 		if(address) {
 			var location = this.autocomplete.getPlace().geometry.location;
-			this.props.addLocationMap(addressObject.name, location.lat(), location.lng());
+			this.props.addEditLocation(addressObject.name, location.lat(), location.lng());
 		}
 	}
 

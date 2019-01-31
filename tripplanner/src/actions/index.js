@@ -9,8 +9,8 @@ export const editDateTime = (dateTime) => ({
 });
 
 // Location Info
-export const addLocationMap = (name, latitude, longitude) => ({
-	type: 'ADD_LOCATION_MAP',
+export const addLocation = (name, latitude, longitude) => ({
+	type: 'ADD_LOCATION',
 	name,
 	latitude,
 	longitude
@@ -28,6 +28,17 @@ export const editLocation = (name, latitude, longitude, id) => ({
 	longitude,
 	id
 })
+
+export const addEditLocation = (name, latitude, longitude) => {
+	return function(dispatch, getState) {
+		var selected = getState().locations.selected;
+		if(selected === -1) {
+			return dispatch(addLocation(name, latitude, longitude));
+		} else {
+			return dispatch(editLocation(name, latitude, longitude, selected));
+		}
+	}
+};
 
 export const deleteLocation = id => ({
 	type: 'DELETE_LOCATION',
